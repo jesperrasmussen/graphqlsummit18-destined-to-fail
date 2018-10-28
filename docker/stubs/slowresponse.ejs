@@ -1,0 +1,33 @@
+{
+  "protocol": "http",
+  "port": 4545,
+  "numberOfRequests": 255,
+  "requests": [],
+  "stubs": [{
+  "responses": [
+    {
+      "is": {
+        "statusCode": 200,
+        "headers": {
+          "Location": "http://localhost:4545/movies",
+          "Content-Type": "application/json"
+        },
+        "body": [
+          {
+            "title": "The Meg",
+            "description": "After escaping an attack by what he claims was a 70-foot shark, Jonas Taylor must confront his fears to save those trapped in a sunken submersible."
+          },
+          {
+            "title": "Venom",
+            "description": "When Eddie Brock acquires the powers of a symbiote, he will have to release his alter-ego \"Venom\" to save his life."
+          }
+        ]
+      },
+      "_behaviors": {
+        "wait": 1000
+      }
+    }
+  ]
+  }
+]
+}

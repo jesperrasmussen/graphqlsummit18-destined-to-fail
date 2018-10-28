@@ -1,0 +1,11 @@
+version: '2'
+services:
+  slow_movies:
+    image: jkris/mountebank
+    volumes:
+    - ./stubs:/stubs
+    ports:
+    - "2525:2525"
+    # movies
+    - "4545:4545"
+    command: --configfile /stubs/imposters.ejs --allowInjection
