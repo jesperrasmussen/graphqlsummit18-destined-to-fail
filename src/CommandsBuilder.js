@@ -7,7 +7,7 @@ export const CommandsBuilder = class CommandsBuilder {
     
     return commandFactory.getOrCreate("moviesservice")
       .run(runFn)
-      .timeout(1000)
+      .timeout(2000)
       .circuitBreakerRequestVolumeThreshold(5)
       .statisticalWindowNumberOfBuckets(5)
       .circuitBreakerSleepWindowInMilliseconds(10000)

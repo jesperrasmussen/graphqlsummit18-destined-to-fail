@@ -11,8 +11,10 @@ var _require = require('apollo-server-express'),
 var _require2 = require('graphql-tools'),
     makeExecutableSchema = _require2.makeExecutableSchema;
 
-var _require3 = require('./movies.js'),
-    Movies = _require3.Movies; // The GraphQL schema in string form
+var _require3 = require('./movies-hystrix.js'),
+    Movies = _require3.Movies;
+
+var _movies = new Movies(); // The GraphQL schema in string form
 
 
 var typeDefs = "\n  type Query { movies: [Movie] }\n  type Movie { title: String, description: String }\n"; // The resolvers
@@ -20,8 +22,7 @@ var typeDefs = "\n  type Query { movies: [Movie] }\n  type Movie { title: String
 var resolvers = {
   Query: {
     movies: function movies() {
-      var movies = new Movies();
-      return movies.fetchAll();
+      return _movies.fetchAll();
     }
   }
 }; // Put together a schema

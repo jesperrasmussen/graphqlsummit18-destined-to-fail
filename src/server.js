@@ -17,7 +17,7 @@ const typeDefs = `
 const resolvers = {
   Query: { 
       movies: () => {
-        return movies.getSomething();
+        return movies.fetchAll();
       }
    },
 };

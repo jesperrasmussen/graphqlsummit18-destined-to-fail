@@ -7,7 +7,7 @@ export class Movies {
       return fetch('http://localhost:4545/movies')
     }
 
-    getSomething () {
+    fetchAll () {
         return CommandsBuilder.createMyCommand({
             runFn: () => {
                 return this.fetchMovies().then((res) => res.json())
