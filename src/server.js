@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
 
-const { Movies } = require('./movies-hystrix.js');
-const movies = new Movies();
+const { MoviesAPI } = require('./movies-hystrix.js');
+const moviesAPI = new MoviesAPI();
 
 // The GraphQL schema in string form
 const typeDefs = `
@@ -17,7 +17,7 @@ const typeDefs = `
 const resolvers = {
   Query: { 
       movies: () => {
-        return movies.fetchAll();
+        return moviesAPI.fetchAll();
       }
    },
 };
