@@ -21,7 +21,7 @@ require('node-hot')
         ]
     });
 
-const { MoviesAPI } = require('./movies-hystrix.js');
+const { MoviesAPI } = require('./movies-hystrix');
 const moviesAPI = new MoviesAPI();
 
 // The GraphQL schema in string form

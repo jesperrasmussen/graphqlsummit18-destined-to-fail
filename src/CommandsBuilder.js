@@ -11,6 +11,7 @@ export const CommandsBuilder = class CommandsBuilder {
       .timeout(2000)
       //Amount of failures, before the health is actually calculated
       .circuitBreakerRequestVolumeThreshold(5)
+      .statisticalWindowLength(20000)
       .statisticalWindowNumberOfBuckets(5)
       // Waiting period before letting a single request through in half open
       .circuitBreakerSleepWindowInMilliseconds(10000)

@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 const { CommandsBuilder } = require('./CommandsBuilder');
+const { CircuitState } = require('./CircuitState');
 
 export class MoviesAPI {
     fetchMovies () {
@@ -16,16 +17,7 @@ export class MoviesAPI {
                 })
             },
             fallbackFn: (error) => {
-                switch (error.message) {
-                    case "CommandTimeOut":
-                        console.log('⚠️ Service timed out');
-                        break;
-                    case "OpenCircuitError":
-                        console.log('⛔️ Circuit Breaker in OPEN state - halting requests to service to back off.');
-                        break;
-                    default:
-                        console.log('I dont know - ' + error.message);
-                }
+                CircuitState.logCircuitstate(error);
                 throw new Error('❌ Movie API not responding');
                 Promise.reject();
             }
