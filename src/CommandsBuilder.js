@@ -5,6 +5,7 @@ export const CommandsBuilder = class CommandsBuilder {
   static createMyCommand({runFn, fallbackFn}){
     let fallback = fallbackFn
     
+    //commandFactory.resetCache()
     return commandFactory.getOrCreate("moviesservice")
       .run(runFn)
       .timeout(2000)
