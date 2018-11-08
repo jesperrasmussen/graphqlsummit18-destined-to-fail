@@ -3,11 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.MoviesAPI = void 0;
-
-var _nodeFetch = _interopRequireDefault(require("node-fetch"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+exports.CircuitState = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15,25 +11,32 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var MoviesAPI =
+var CircuitState =
 /*#__PURE__*/
 function () {
-  function MoviesAPI() {
-    _classCallCheck(this, MoviesAPI);
+  function CircuitState() {
+    _classCallCheck(this, CircuitState);
   }
 
-  _createClass(MoviesAPI, [{
-    key: "fetchAll",
-    value: function fetchAll() {
-      return (0, _nodeFetch.default)('http://localhost:4545/movies', {
-        timeout: 2000
-      }).then(function (res) {
-        return res.json();
-      });
+  _createClass(CircuitState, null, [{
+    key: "logCircuitstate",
+    value: function logCircuitstate(error) {
+      switch (error.message) {
+        case "CommandTimeOut":
+          console.log('⚠️ Service timed out');
+          break;
+
+        case "OpenCircuitError":
+          console.log('⛔️ Circuit Breaker in OPEN state - halting requests to service to back off.');
+          break;
+
+        default:
+          console.log('I dont know - ' + error.message);
+      }
     }
   }]);
 
-  return MoviesAPI;
+  return CircuitState;
 }();
 
-exports.MoviesAPI = MoviesAPI;
+exports.CircuitState = CircuitState;

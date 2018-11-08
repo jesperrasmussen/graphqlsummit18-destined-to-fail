@@ -15,6 +15,12 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+var _require = require('./CommandsBuilder'),
+    CommandsBuilder = _require.CommandsBuilder;
+
+var _require2 = require('./CircuitState'),
+    CircuitState = _require2.CircuitState;
+
 var MoviesAPI =
 /*#__PURE__*/
 function () {
@@ -23,13 +29,31 @@ function () {
   }
 
   _createClass(MoviesAPI, [{
-    key: "fetchAll",
-    value: function fetchAll() {
+    key: "fetchMovies",
+    value: function fetchMovies() {
+      console.log('Trying to grab some sweet movie metadata!');
       return (0, _nodeFetch.default)('http://localhost:4545/movies', {
         timeout: 2000
-      }).then(function (res) {
-        return res.json();
       });
+    }
+  }, {
+    key: "fetchAll",
+    value: function fetchAll() {
+      var _this = this;
+
+      return CommandsBuilder.createMyCommand({
+        runFn: function runFn() {
+          return _this.fetchMovies().then(function (res) {
+            console.log('✅ Everything went very well. Circuit Breaker is in CLOSED state.');
+            return res.json();
+          });
+        },
+        fallbackFn: function fallbackFn(error) {
+          CircuitState.logCircuitstate(error);
+          throw new Error('❌ Movie API not responding');
+          Promise.reject();
+        }
+      }).execute();
     }
   }]);
 
