@@ -2,6 +2,10 @@
 
 This allows you to run (and inspect) the HystrixJS solution I presented at GraphQL Summit 2018.
 
+## The slides
+
+Slides are available at [http://files.jesperrasmussen.com/DestinedToFail.pdf](http://files.jesperrasmussen.com/DestinedToFail.pdf)
+
 ## Running
 
 ### Starting the mock service
